@@ -1,17 +1,535 @@
-<!DOCTYPE html>
-<html>
+ <!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Page Title</title>
+  <title>{{file_name}} - Filetolinkogbot</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+
+
+<style>
+
+  body{
+    background-color: #18191A;
+  }
+        video {
+            width: 100%;
+            height: auto;
+            display: block; /* Removes default inline spacing */
+        }
+
+  .block {
+    
+      margin-top:3px;
+      margin-bottom:2px;
+      border-radius:4px;
+      flex-direction: row;
+  display: block;
+  width: auto;
+  border: none;
+  background-color: #1B87EA;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.block:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  background-color: #ddd;
+  color: black;
+  }
+
+
+h3 {
+  text-align: center;
+  max-width: 320px;
+}
+
+  .button-area {
+  margin: 5px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 320px;
+}
+.button-area a {
+  background: #999;
+  padding: 1em 2.4em;
+  font-size: .9em;
+  margin: 1em;
+  color: white;
+  text-decoration: none;
+  flex-grow: 1;
+  text-align: center;
+  }
+
+.button-area-line {
+  margin: 1px auto;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  max-width: 100%;
+}
+.button-area-line a {
+  background: #fd723a;
+  padding: 1em;
+  font-size: .9em;
+  margin: .3em;
+  color: white;
+  text-decoration: none;
+  flex-grow: 1;
+  text-align: center;
+}
+
+          }
+
+
+.containerinfo {
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden; /* Hide scrollbars for container */
+        }
+        #file-name {
+            color: #B3B3B3; /* Set text color */
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 0;
+            padding: 10px;
+            text-align: center;
+            white-space: nowrap; /* Prevent text from wrapping */
+            overflow: hidden; /* Hide overflowed text */
+            text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+            display: block; /* Ensure it behaves like a block element */
+            cursor: pointer;
+        }
+
+
+  
+</style>
+
+ <style>
+        #con1, #con2 {
+            display: none;
+        }
+        #con2 {
+            display: block; /* Make con2 visible by default */
+        }
+
+        button {
+            padding: 10px 20px; /* Add padding around the text */
+            font-size: 16px; /* Set the font size */
+            color: white; /* Set the text color */
+            background-color: #007BFF; /* Set the background color */
+            border: none; /* Remove the border */
+            border-radius: 5px; /* Round the corners */
+            cursor: pointer; /* Change the cursor to a pointer */
+            transition: background-color 0.3s ease; /* Add a transition effect */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Change background color on hover */
+        }
+
+        button:focus {
+            outline: none; /* Remove the default outline */
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Add a custom focus outline */
+        }
+    </style>
+    <script>
+        let isCon1Visible = false; // Track visibility state
+        let countdownInterval;
+
+        function toggleVisibility() {
+            const con1 = document.getElementById('con1');
+            const con2 = document.getElementById('con2');
+            const button = con2.querySelector('button');
+            let countdown = 10; // Countdown time in seconds
+
+            // Start the countdown
+            button.textContent = `Wait ${countdown} seconds`;
+
+            countdownInterval = setInterval(() => {
+                countdown--;
+                button.textContent = `Wait ${countdown} seconds`;
+
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval); // Stop the countdown
+                    button.textContent = 'Toggle Visibility'; // Reset button text
+                    // Toggle visibility
+                    if (isCon1Visible) {
+                        con1.style.display = 'none';
+                        con2.style.display = 'block';
+                    } else {
+                        con1.style.display = 'block';
+                        con2.style.display = 'none';
+                    }
+                    isCon1Visible = !isCon1Visible; // Toggle the state
+                }
+            }, 1000); // Update every second
+        }
+    </script>
+  
 </head>
 <body>
 
-<title>{{file_name}} | Tech VJ</title>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="https://t.me/Filetolinkogbot">Filetolinkogbot</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+       <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Page 1-1</a></li>
+            <li><a href="#">Page 1-2</a></li>
+            <li><a href="#">Page 1-3</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Page 2</a></li>
+        <li><a href="#">Page 3</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://t.me/Filetolinkogbot"><span class="glyphicon glyphicon-heart"></span> Join Bot</a></li>
+        <li><a href="https://t.me/Hollywood_in_HindiHD"><span class="glyphicon glyphicon-bell"></span> Get Updates
+        </a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+<div class="container">
 
-  <video id="player" class="player " playsinline controls>
-                    <source src="{{file_url}}" type="video/mp4">
-                </video>
+<!--Video Player-->
 
+<!--Video Player Start-->
+
+  <p id="demol" style="font-size: 0px;"></p>
+
+
+<div class="containervid">
+      
+        
+<video id="video-id" controls>
+        <source id="video-source" type="video/mp4">
+    </video>
+    
+    <script>
+        // Function to get the value of a URL parameter
+        function getParameterByName(name) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(window.location.href);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Get the value of the 'PIN' parameter
+        var pinValue = getParameterByName('PIN');
+        
+        // Check if 'PIN' parameter exists
+        if (pinValue) {
+            // Construct the video URL or use it as needed
+            var videoUrl = pinValue;
+            console.log('Video URL:', videoUrl);
+
+            // Update the video source
+            document.getElementById('video-source').src = videoUrl;
+        } else {
+            console.log('PIN parameter not found in URL');
+        }
+
+        // Initialize Fluid Player
+        var myFP = fluidPlayer(
+            'video-id', {
+                "layoutControls": {
+                    "controlBar": {
+                        "autoHideTimeout": 3,
+                        "animated": true,
+                        "autoHide": true
+                    },
+                    "htmlOnPauseBlock": {
+                        "html": null,
+                        "height": null,
+                        "width": null
+                    },
+                    "autoPlay": true,
+                    "mute": false,
+                    "allowTheatre": true,
+                    "playPauseAnimation": true,
+                    "playbackRateEnabled": true,
+                    "allowDownload": false,
+                    "playButtonShowing": true,
+                    "fillToContainer": false,
+                    "posterImage": ""
+                },
+                "vastOptions": {
+                    "adList": [
+                        {
+                            "roll": "preRoll",
+                            "vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
+                            "adText": ""
+                        },
+                        {
+                            "roll": "midRoll",
+                            "vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
+                            "adText": ""
+                        },
+                        {
+                            "roll": "postRoll",
+                            "vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
+                            "adText": ""
+                        },
+                        {
+                            "roll": "onPauseRoll",
+                            "vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
+                            "adText": ""
+                        }
+                    ],
+                    "adCTAText": false,
+                    "adCTATextPosition": ""
+                }
+            }
+        );
+    </script>
+        
+<!--Video Player-->
+
+
+
+
+
+
+
+
+<script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+<video id="video-id"><source src="{{file_url}}" type="video/mp4" />
+<script>
+    var myFP = fluidPlayer(
+        'video-id',	{
+	"layoutControls": {
+		"controlBar": {
+			"autoHideTimeout": 3,
+			"animated": true,
+			"autoHide": true
+		},
+		"htmlOnPauseBlock": {
+			"html": null,
+			"height": null,
+			"width": null
+		},
+		"autoPlay": false,
+		"mute": true,
+		"allowTheatre": true,
+		"playPauseAnimation": false,
+		"playbackRateEnabled": false,
+		"allowDownload": false,
+		"playButtonShowing": false,
+		"fillToContainer": false,
+		"posterImage": ""
+	},
+	"vastOptions": {
+		"adList": [],
+		"adCTAText": false,
+		"adCTATextPosition": ""
+	}
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+<div class="containerinfo">
+  
+  <!-- Start File Name -->
+  <strong><p id="file-name"></p></strong>
+  
+  <script>
+    function getFileName() {
+      // Get the current page URL
+      var url = decodeURIComponent(window.location.href);
+      
+      // Get the value of the 'PIN' parameter from the URL
+      var pinIndex = url.indexOf("PIN=") + 4;
+      var videoLink = url.substring(pinIndex);
+
+
+document.getElementById("demol").innerHTML = videoLink;
+
+
+
+      
+// VLC Player 'vlc-link'
+        document.getElementById('vlc-link').href = 'vlc://' + videoLink;
+      
+ // Download 'dl-link'
+        document.getElementById('dl-link').href = videoLink;
+
+ // MX Player mx-link
+      document.getElementById('mx-link').href = 'intent:' + videoLink + '#Intent;package=com.mxtech.videoplayer.ad;end';
+
+// VLC Player 'vlc-link'
+        document.getElementById('vp-link').href = videoLink;  
+      
+      // Replace underscores (_) and plus signs (+) with spaces in the video link
+      videoLink = videoLink.replace(/_/g, ' ').replace(/\+/g, ' ');
+      
+      // Extract the file name from the video link by finding the last '/' character in the URL
+      var fileName = videoLink.substring(videoLink.lastIndexOf("/") + 1);
+
+      
+            
+            
+      
+      // Remove all text after '.mp4' or '.mkv' from the extracted file name
+      fileName = fileName.replace(/(\.mp4|\.mkv).*$/i, '');
+      
+      // Replace underscores (_) and plus signs (+) with spaces in the extracted file name
+      fileName = fileName.replace(/_/g, ' ').replace(/\+/g, ' ');
+      
+      // Set the text content of the 'file-name' element to the extracted file name
+      document.getElementById("file-name").textContent = fileName;
+    }
+
+    // Call the getFileName function when the page finishes loading
+    window.addEventListener("load", getFileName);
+    
+    // Update the href attribute of the element with ID "demo3" (assuming it exists)
+    document.getElementById("demo3").href = videoLink;
+  </script>
+  
+  <!-- End File Name -->
+</div>
+
+  <!-- Button -->
+
+  <!--Button Start-->
+  
+  <div id="con2">
+        <center>
+            <button onclick="toggleVisibility()" style="margin-bottom: 10px;">I am not Robot</button>
+            
+             <p style="color: #b3b3b3;">
+  <strong>Human Verification Button</strong>
+</p>
+            <script async="async" data-cfasync="false" src="//twinelandlord.com/adc9bbee11824087e954fead49a2c281/invoke.js"></script>
+<div id="container-adc9bbee11824087e954fead49a2c281"></div>
+            
+        </center>
+    </div>
+  
+  
+  <div id="con1">
+  <div class="con1">
+
+
+         <div class="button-area-line">
+
+
+
+           <a id="vlc-link" href="" class="block"><i class="fa fa-play"></i> Stream VLC</a>
+
+
+
+          <a id="mx-link" 
+    href="" class="block" ><i class="fa fa-play"></i> MX Player</a>
+
+
+         </div>
+
+           <a id="dl-link" 
+    href="" class="block" target="_blank" ><i class="fa fa-download"></i> Download File</a>
+</div>
+  <!--Button End-->
+  <!-- Button -->
+
+    <!--banner ad-->
+    
+    
+  <center>
+	<script type="text/javascript">
+	atOptions = {
+		'key' : '755401d05147eec3bc1bbee87cded27a',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//twinelandlord.com/755401d05147eec3bc1bbee87cded27a/invoke.js"></script>
+  </center>
+
+    <!--banner ad-->
+    
+
+    <p style="color: #b3b3b3; margin-top: 20px;">
+  The solution video may not be playing due to unsupported codecs in your browser or player. To resolve this issue, try downloading the video and watching it directly, or stream it using <strong>MX Player</strong> or <strong>VLC Player</strong> for a better experience.
+</p>
+
+    <div style="border: 0px solid #ddd; border-radius: 8px; padding: 16px; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); margin-top: 20px; margin-bottom: 20px; background-color: #2d2d2d; color: #ffffff;"">
+      <p><strong>Disclaimer</strong></p>
+      <p>
+        This website only provides a service to help you play your video online without downloading. This website does not offer storage or dissemination functions. You can report any video containing issues such as copyright infringement, pornography, violence, etc., to FiletolinkBOT Support.
+      </p>
+    </div>
+
+
+  
+</div>
+
+  <script>
+    
+  
+  </script>
+     
+  </script>
+  
+  
+  
+  
 </body>
 </html>
+
+  
+  
+  
+  
+
+
+
 
 
