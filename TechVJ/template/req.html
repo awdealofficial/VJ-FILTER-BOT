@@ -234,10 +234,9 @@ h3 {
 
 <div class="containervid">
       
-        
-
+ 
 <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
-<video id="video-id"><source src="{{file_url}}" type="video/mp4" />
+<video id="video-id"><source src="{{file_url}" type="video/mp4" />
 <script>
     var myFP = fluidPlayer(
         'video-id',	{
@@ -252,7 +251,7 @@ h3 {
 			"height": null,
 			"width": null
 		},
-		"autoPlay": false,
+		"autoPlay": true,
 		"mute": true,
 		"allowTheatre": true,
 		"playPauseAnimation": false,
@@ -263,34 +262,39 @@ h3 {
 		"posterImage": ""
 	},
 	"vastOptions": {
-		"adList": [],
+		"adList": [
+			{
+				"roll": "preRoll",
+				"vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
+				"adText": ""
+			},
+			{
+				"roll": "midRoll",
+				"vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
+				"adText": ""
+			},
+			{
+				"roll": "postRoll",
+				"vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
+				"adText": ""
+			},
+			{
+				"roll": "onPauseRoll",
+				"vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
+				"adText": ""
+			}
+		],
 		"adCTAText": false,
 		"adCTATextPosition": ""
 	}
 });
 </script>
+
+
         
 <!--Video Player-->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 <div class="containerinfo">
   
   <!-- Start File Name -->
