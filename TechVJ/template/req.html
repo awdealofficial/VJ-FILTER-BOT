@@ -235,98 +235,6 @@ h3 {
 <div class="containervid">
       
         
-<video id="video-id" controls>
-        <source id="video-source" type="video/mp4">
-    </video>
-    
-    <script>
-        // Function to get the value of a URL parameter
-        function getParameterByName(name) {
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(window.location.href);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
-
-        // Get the value of the 'PIN' parameter
-        var pinValue = getParameterByName('PIN');
-        
-        // Check if 'PIN' parameter exists
-        if (pinValue) {
-            // Construct the video URL or use it as needed
-            var videoUrl = pinValue;
-            console.log('Video URL:', videoUrl);
-
-            // Update the video source
-            document.getElementById('video-source').src = videoUrl;
-        } else {
-            console.log('PIN parameter not found in URL');
-        }
-
-        // Initialize Fluid Player
-        var myFP = fluidPlayer(
-            'video-id', {
-                "layoutControls": {
-                    "controlBar": {
-                        "autoHideTimeout": 3,
-                        "animated": true,
-                        "autoHide": true
-                    },
-                    "htmlOnPauseBlock": {
-                        "html": null,
-                        "height": null,
-                        "width": null
-                    },
-                    "autoPlay": true,
-                    "mute": false,
-                    "allowTheatre": true,
-                    "playPauseAnimation": true,
-                    "playbackRateEnabled": true,
-                    "allowDownload": false,
-                    "playButtonShowing": true,
-                    "fillToContainer": false,
-                    "posterImage": ""
-                },
-                "vastOptions": {
-                    "adList": [
-                        {
-                            "roll": "preRoll",
-                            "vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
-                            "adText": ""
-                        },
-                        {
-                            "roll": "midRoll",
-                            "vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
-                            "adText": ""
-                        },
-                        {
-                            "roll": "postRoll",
-                            "vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
-                            "adText": ""
-                        },
-                        {
-                            "roll": "onPauseRoll",
-                            "vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
-                            "adText": ""
-                        }
-                    ],
-                    "adCTAText": false,
-                    "adCTATextPosition": ""
-                }
-            }
-        );
-    </script>
-        
-<!--Video Player-->
-
-
-
-
-
-
-
 
 <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
 <video id="video-id"><source src="{{file_url}}" type="video/mp4" />
@@ -361,6 +269,16 @@ h3 {
 	}
 });
 </script>
+        
+<!--Video Player-->
+
+
+
+
+
+
+
+
 
 
 
