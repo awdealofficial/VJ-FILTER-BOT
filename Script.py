@@ -703,13 +703,13 @@ Also your tutorial will be Added Your Group..."""
     DEVELOPER_TXT = """
 special Thanks To ❤️ Developers -
 
--Dev 1 [Owner of this bot ]<a href='https://t.me/KingVj01'>VJ</a>
+-Dev 1 [Owner of this bot ]<a href='https://https://t.me/hollywood_in_hindihd'>Movie Updates</a>
 
--Dev 2 <a href='https://t.me/vjbots_bot'>VJ</a>
+-Dev 2 <a href='https://https://t.me/hollywood_in_hindihd'>Movie Updates</a>
 
--Dev 3 <a href='https://t.me/vj_botz>VJ Botz</a>
+-Dev 3 <a href='https://https://t.me/hollywood_in_hindihd>Movie Updates</a>
 
-- Dev 4 <a href='https://t.me/vj_bots'>TEAM VJ</a>
+- Dev 4 <a href='https://https://t.me/hollywood_in_hindihd'>Movie Updates</a>
 """
 
     RENAME_TXT = """
