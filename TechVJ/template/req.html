@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+<link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
 
 
 <style>
@@ -234,61 +234,28 @@ h3 {
 
 <div class="containervid">
       
- 
-<script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
-<video id="video-id"><source src="{{file_url}}" type="video/mp4" />
-<script>
-    var myFP = fluidPlayer(
-        'video-id',	{
-	"layoutControls": {
-		"controlBar": {
-			"autoHideTimeout": 3,
-			"animated": true,
-			"autoHide": true
-		},
-		"htmlOnPauseBlock": {
-			"html": null,
-			"height": null,
-			"width": null
-		},
-		"autoPlay": true,
-		"mute": true,
-		"allowTheatre": true,
-		"playPauseAnimation": false,
-		"playbackRateEnabled": false,
-		"allowDownload": false,
-		"playButtonShowing": false,
-		"fillToContainer": false,
-		"posterImage": ""
-	},
-	"vastOptions": {
-		"adList": [
-			{
-				"roll": "preRoll",
-				"vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
-				"adText": ""
-			},
-			{
-				"roll": "midRoll",
-				"vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
-				"adText": ""
-			},
-			{
-				"roll": "postRoll",
-				"vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
-				"adText": ""
-			},
-			{
-				"roll": "onPauseRoll",
-				"vastTag": "https://www.videosprofitnetwork.com/watch.xml?key=590dc86c8dbb02bd7dd4547cc33a7b4b",
-				"adText": ""
-			}
-		],
-		"adCTAText": false,
-		"adCTATextPosition": ""
-	}
-});
-</script>
+   <video
+    id="my-video"
+    class="video-js"
+    controls
+    preload="auto"
+    width="640"
+    height="264"
+    poster="MY_VIDEO_POSTER.jpg"
+    data-setup="{}"
+  >
+    <source src="https://stream-manojthe.koyeb.app/104268/%D0%9E%D1%82%D1%8A%D0%B5%D0%B1%D0%B0%D0%BB+%D1%82%D0%B0%D1%82%D1%83%D1%88%D0%BA%D1%83.mp4?hash=AgAD7w" type="video/mp4" />
+    <source src="MY_VIDEO.webm" type="video/webm" />
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that
+      <a href="https://videojs.com/html5-video-support/" target="_blank"
+        >supports HTML5 video</a
+      >
+    </p>
+  </video>
+
+  <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
 
 
         
@@ -450,7 +417,6 @@ document.getElementById("demol").innerHTML = videoLink;
   
   
   
-
 
 
 
