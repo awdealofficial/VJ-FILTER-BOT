@@ -1,394 +1,292 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>{{file_name}} - Filetolinkogbot</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  
-  <!-- jQuery and Bootstrap JS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-  <!-- Video.js CSS -->
-  <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
-
-  <style>
-    body {
-      background-color: #18191A;
-      margin: 0;
-      padding: 0;
-    }
-
-    .block {
-      margin-top: 3px;
-      margin-bottom: 2px;
-      border-radius: 4px;
-      display: block;
-      width: auto;
-      border: none;
-      background-color: #1B87EA;
-      color: white;
-      padding: 14px 28px;
-      font-size: 16px;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .block:hover {
-      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-      background-color: #ddd;
-      color: black;
-    }
-
-    h3 {
-      text-align: center;
-      max-width: 320px;
-    }
-
-    .button-area {
-      margin: 5px auto;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      max-width: 320px;
-    }
-
-    .button-area a {
-      background: #999;
-      padding: 1em 2.4em;
-      font-size: .9em;
-      margin: 1em;
-      color: white;
-      text-decoration: none;
-      flex-grow: 1;
-      text-align: center;
-    }
-
-    .button-area-line {
-      margin: 1px auto;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      flex-wrap: nowrap;
-      max-width: 100%;
-    }
-
-    .button-area-line a {
-      background: #fd723a;
-      padding: 1em;
-      font-size: .9em;
-      margin: .3em;
-      color: white;
-      text-decoration: none;
-      flex-grow: 1;
-      text-align: center;
-    }
-
-    .containerinfo {
-      padding: 10px;
-      border: 1px solid #ddd;
-      background-color: #f9f9f9;
-      border-radius: 5px;
-      max-width: 600px;
-      margin: 0 auto;
-      overflow: hidden; /* Hide scrollbars for container */
-    }
-
-    #file-name {
-      color: #B3B3B3; /* Set text color */
-      font-size: 1.2em;
-      font-weight: bold;
-      margin: 0;
-      padding: 10px;
-      text-align: center;
-      white-space: nowrap; /* Prevent text from wrapping */
-      overflow: hidden; /* Hide overflowed text */
-      text-overflow: ellipsis; /* Show ellipsis for overflowed text */
-      display: block; /* Ensure it behaves like a block element */
-      cursor: pointer;
-    }
-
-    #con1, #con2 {
-      display: none;
-    }
-
-    #con2 {
-      display: block; /* Make con2 visible by default */
-    }
-
-    button {
-      padding: 10px 20px; /* Add padding around the text */
-      font-size: 16px; /* Set the font size */
-      color: white; /* Set the text color */
-      background-color: #007BFF; /* Set the background color */
-      border: none; /* Remove the border */
-      border-radius: 5px; /* Round the corners */
-      cursor: pointer; /* Change the cursor to a pointer */
-      transition: background-color 0.3s ease; /* Add a transition effect */
-    }
-
-    button:hover {
-      background-color: #0056b3; /* Change background color on hover */
-    }
-
-    button:focus {
-      outline: none; /* Remove the default outline */
-      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Add a custom focus outline */
-    }
-
-    /* Responsive Video Styles */
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-      height: 0;
-      overflow: hidden;
-      max-width: 100%;
-      background: #000;
-      margin-bottom: 20px;
-    }
-
-    .video-container video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .container {
-      padding: 15px;
-    }
-
-    /* Optional: Center the container horizontally */
-    .container {
-      max-width: 1200px; /* Adjust based on your layout needs */
-      margin: 0 auto;
-    }
-
-    .ad-container {
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    .disclaimer {
-      border: 0px solid #ddd;
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-      margin-top: 20px;
-      margin-bottom: 20px;
-      background-color: #2d2d2d;
-      color: #ffffff;
-    }
-
-    .disclaimer p {
-      margin: 0;
-    }
-  </style>
-
-  <script>
-    let isCon1Visible = false; // Track visibility state
-    let countdownInterval;
-
-    function toggleVisibility() {
-      const con1 = document.getElementById('con1');
-      const con2 = document.getElementById('con2');
-      const button = con2.querySelector('button');
-      let countdown = 10; // Countdown time in seconds
-
-      // Start the countdown
-      button.textContent = `Wait ${countdown} seconds`;
-
-      countdownInterval = setInterval(() => {
-        countdown--;
-        button.textContent = `Wait ${countdown} seconds`;
-
-        if (countdown <= 0) {
-          clearInterval(countdownInterval); // Stop the countdown
-          button.textContent = 'Toggle Visibility'; // Reset button text
-          // Toggle visibility
-          if (isCon1Visible) {
-            con1.style.display = 'none';
-            con2.style.display = 'block';
-          } else {
-            con1.style.display = 'block';
-            con2.style.display = 'none';
-          }
-          isCon1Visible = !isCon1Visible; // Toggle the state
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Link Generator - File Download</title>
+    
+   
+    <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+   
+   
+    <style>
+        :root {
+            --bg-color: #f4f4f4;
+            --text-color: #333;
+            --header-bg: #3498db;
+            --header-text: #fff;
+            --content-bg: #fff;
+            --btn-bg: #3498db;
+            --btn-text: #fff;
+            --btn-hover: #2980b9;
         }
-      }, 1000); // Update every second
-    }
-  </script>
-  
+
+        .dark-theme {
+            --bg-color: #181818;
+            --text-color: #f4f4f4;
+            --header-bg: #212121;
+            --header-text: #ecf0f1;
+            --content-bg: #212121;
+            --btn-bg: #3498db;
+            --btn-text: #ecf0f1;
+            --btn-hover: #2980b9;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .content {
+            background-color: var(--content-bg);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .file-info {
+            margin-bottom: 20px;
+        }
+
+        .download-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--btn-hover);
+        }
+
+        .disclaimer {
+            font-size: 0.9em;
+            color: var(--text-color);
+            margin-top: 20px;
+        }
+
+        .video-container {
+            margin-bottom: 20px;
+            max-width: 75%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #theme-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: var(--header-text);
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .download-buttons {
+                flex-direction: column;
+            }
+
+            .video-container {
+                max-width: 100%;
+            }
+        }
+    </style>
+    
+    <style>
+        #video-container {
+            width: 100%;
+            height: auto;
+            position: relative;
+        }
+
+        #video-id {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
 </head>
+
 <body>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="https://t.me/Filetolinkogbot">Filetolinkogbot</a>
+    <header>
+        <h1>Public Link Generator</h1>
+        <button id="theme-toggle">🌓</button>
+    </header>
+    <div class="container">
+        <div class="content">
+             <div id="video-container">
+        <video id="video-id">
+            <source src="{{file_url}}" type="video/mp4" />
+        </video>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Page 1-1</a></li>
-            <li><a href="#">Page 1-2</a></li>
-            <li><a href="#">Page 1-3</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="https://t.me/Filetolinkogbot"><span class="glyphicon glyphicon-heart"></span> Join Bot</a></li>
-        <li><a href="https://t.me/Hollywood_in_HindiHD"><span class="glyphicon glyphicon-bell"></span> Get Updates</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-  
-<div class="container">
 
-  <!-- Video Player -->
-  <div class="video-container">
-    <video
-      id="my-video"
-      class="video-js"
-      controls
-      preload="auto"
-      poster="MY_VIDEO_POSTER.jpg"
-      data-setup="{}"
-    >
-      <source src="{{file_url}}" type="video/mp4" />
-      <p class="vjs-no-js">
-        To view this video please enable JavaScript, and consider upgrading to a
-        web browser that
-        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-      </p>
-    </video>
-  </div>
-
-  <!-- Include Video.js JavaScript -->
-  <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
-
-  <!-- Container for additional information -->
-  <div class="containerinfo">
-    <strong><p id="file-name"></p></strong>
     <script>
-      function getFileName() {
-        // Get the current page URL
-        var url = decodeURIComponent(window.location.href);
-        
-        // Get the value of the 'PIN' parameter from the URL
-        var pinIndex = url.indexOf("PIN=") + 4;
-        var videoLink = url.substring(pinIndex);
-
-        document.getElementById("demol").innerHTML = videoLink;
-
-        // VLC Player 'vlc-link'
-        document.getElementById('vlc-link').href = 'vlc://' + videoLink;
-        
-        // Download 'dl-link'
-        document.getElementById('dl-link').href = videoLink;
-
-        // MX Player mx-link
-        document.getElementById('mx-link').href = 'intent:' + videoLink + '#Intent;package=com.mxtech.videoplayer.ad;end';
-
-        // VLC Player 'vp-link'
-        document.getElementById('vp-link').href = videoLink;
-        
-        // Replace underscores (_) and plus signs (+) with spaces in the video link
-        videoLink = videoLink.replace(/_/g, ' ').replace(/\+/g, ' ');
-        
-        // Extract the file name from the video link
-        var fileName = videoLink.substring(videoLink.lastIndexOf("/") + 1);
-        
-        // Remove all text after '.mp4' or '.mkv'
-        fileName = fileName.replace(/(\.mp4|\.mkv).*$/i, '');
-        
-        // Replace underscores (_) and plus signs (+) with spaces in the extracted file name
-        fileName = fileName.replace(/_/g, ' ').replace(/\+/g, ' ');
-        
-        // Set the text content of the 'file-name' element to the extracted file name
-        document.getElementById("file-name").textContent = fileName;
-      }
-
-      // Call the getFileName function when the page finishes loading
-      window.addEventListener("load", getFileName);
-      
-      // Update the href attribute of the element with ID "demo3" (assuming it exists)
-      document.getElementById("demo3").href = videoLink;
+        var myFP = fluidPlayer(
+            'video-id', {
+                "layoutControls": {
+                    "controlBar": {
+                        "autoHideTimeout": 3,
+                        "animated": true,
+                        "autoHide": true
+                    },
+                    "htmlOnPauseBlock": {
+                        "html": null,
+                        "height": null,
+                        "width": null
+                    },
+                    "autoPlay": true,
+                    "mute": false,
+                    "allowTheatre": true,
+                    "playPauseAnimation": false,
+                    "playbackRateEnabled": false,
+                    "allowDownload": false,
+                    "playButtonShowing": false,
+                    "fillToContainer": false,
+                    "posterImage": ""
+                },
+                "vastOptions": {
+                    "adList": [],
+                    "adCTAText": false,
+                    "adCTATextPosition": ""
+                }
+            }
+        );
     </script>
-  </div>
-
-  <!-- Button -->
-  <div id="con2">
-    <center>
-      <button onclick="toggleVisibility()" style="margin-bottom: 10px;">I am not Robot</button>
-      <p style="color: #b3b3b3;">
-        <strong>Human Verification Button</strong>
-      </p>
-      <script async="async" data-cfasync="false" src="//twinelandlord.com/adc9bbee11824087e954fead49a2c281/invoke.js"></script>
-      <div id="container-adc9bbee11824087e954fead49a2c281"></div>
-    </center>
-  </div>
-
-  <div id="con1">
-    <div class="con1">
-      <div class="button-area-line">
-        <a id="vlc-link" href="" class="block"><i class="fa fa-play"></i> Stream VLC</a>
-        <a id="mx-link" href="" class="block"><i class="fa fa-play"></i> MX Player</a>
-      </div>
-      <a id="dl-link" href="" class="block" target="_blank"><i class="fa fa-download"></i> Download File</a>
+            <div class="file-info">
+                <h2>{{file_name}}</h2>
+                <p><strong>File Size:</strong> </p>
+            </div>
+            <div class="download-buttons">
+                <a href="" class="btn">Download (US)</a>
+                <a href="" class="btn">Download (Europe)</a>
+                <div class="btn" onclick='copyToClipboard("");'>Copy Link</div>
+                <a class="btn" href="vlc://{{file_url}}">
+                    Open In VLC
+                </a>
+                <a class="btn" href="intent:{{file_url}}#Intent;package=com.mxtech.videoplayer.ad;end">
+                    Open In MX Player
+                </a>
+            </div>
+            <div class="disclaimer">
+                <p>This content may be copyrighted. If you believe this is unauthorized, please <a
+                        href="mailto:shdeekshith@gmail.com">contact me</a>.</p>
+                <p>Email: mail@springsfern.in</p>
+                <p>Note: All files are stored on Telegram. We do not host or distribute any content directly. This
+                    platform acts as a service to facilitate file sharing.</p>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <!-- Banner Ad -->
-  <div class="ad-container">
-    <script type="text/javascript">
-      atOptions = {
-        'key': '755401d05147eec3bc1bbee87cded27a',
-        'format': 'iframe',
-        'height': 50,
-        'width': 320,
-        'params': {}
-      };
+    <div>
+        <p>Ads</p>
+        <script async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9019718369052772"
+            crossorigin="anonymous"></script>
+        <!-- Vertical Display Ad -->
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9019718369052772"
+            data-ad-slot="1227119746" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <script>
+        // Initialize video.js player
+        var player = videojs('videoPlayer');
     </script>
-    <script type="text/javascript" src="//twinelandlord.com/755401d05147eec3bc1bbee87cded27a/invoke.js"></script>
-  </div>
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Link copied to clipboard!');
+            });
+        }
 
-  <!-- Disclaimer -->
-  <div class="disclaimer">
-    <p><strong>Disclaimer</strong></p>
-    <p>
-      This website only provides a service to help you play your video online without downloading. This website does not offer storage or dissemination functions. You can report any video containing issues such as copyright infringement, pornography, violence, etc., to FiletolinkBOT Support.
-    </p>
-  </div>
+        // Theme switching functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
 
-</div>
+        // Function to set a cookie
+        function setCookie(name, value, days) {
+            const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
+            document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/';
+        }
 
-<script>
-  // Ensure the video player is responsive
-  document.addEventListener('DOMContentLoaded', function() {
-    const video = document.getElementById('my-video');
-    if (video) {
-      video.style.maxWidth = '100%';
-      video.style.height = 'auto';
-    }
-  });
-</script>
+        // Function to get a cookie
+        function getCookie(name) {
+            const cookieArr = document.cookie.split(';');
+            for (let i = 0; i < cookieArr.length; i++) {
+                let cookiePair = cookieArr[i].split('=');
+                if (name == cookiePair[0].trim()) {
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            return null;
+        }
 
+        // Function to toggle theme
+        function toggleTheme() {
+            if (body.classList.contains('dark-theme')) {
+                body.classList.remove('dark-theme');
+                themeToggle.textContent = '🌓';
+                setCookie('theme', 'light', 30);
+            } else {
+                body.classList.add('dark-theme');
+                themeToggle.textContent = '☀️';
+                setCookie('theme', 'dark', 30);
+            }
+        }
+
+        // Check for saved theme preference
+        window.onload = function () {
+            const savedTheme = getCookie('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-theme');
+                themeToggle.textContent = '☀️';
+            }
+        };
+
+        // Event listener for theme toggle button
+        themeToggle.addEventListener('click', toggleTheme);
+    </script>
 </body>
+
 </html>
+
+
